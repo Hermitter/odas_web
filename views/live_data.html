@@ -23,18 +23,23 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <button type="button" class="navbar-toggle collapsed navbar-button" data-toggle="collapse" data-target="#source-list" aria-expanded="false">
+                        <!-- <button type="button" class="navbar-toggle collapsed navbar-button" data-toggle="collapse" data-target="#source-list" aria-expanded="false">
                             Sources
-                        </button>
+                        </button> -->
                         <a class="navbar-brand navbar-logo" width="120" href="#"><img src="./../resources/images/introlab_icon.png"></a>
                         <a class="navbar-brand" width="120" href="#"><span>ODAS Studio</span></a>
                     </div>
 
                 <div class="collapse navbar-collapse" id="navbar-content">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" onclick="ipcRenderer.send('open-configure-window')">Configure</a></li>
+                        <!-- <li><a href="#" onclick="ipcRenderer.send('open-configure-window')">Configure</a></li>
                         <li><a href="#" onclick="ipcRenderer.send('open-recordings-window')">Record</a></li>
-                        <li><a href="#" onclick="ipcRenderer.send('open-share-window')">Camera</a></li>
+                        <li><a href="#" onclick="ipcRenderer.send('open-share-window')">Camera</a></li> -->
+                        <div id="system-monitor">
+                                <p>IP {{system.ip}}</p>
+                                <p>CPU Usage {{system.cpu}}</p>
+                        </div>
+                        
                     </ul>
                 </div>
 
@@ -99,11 +104,8 @@
                         </div>
                     </div> -->
 
-
-
-
                     <div class="col-md-7 layout">
-                        <div id="system-monitor"><p>IP {{system.ip}}</p></div>
+                        <span style="margin-right: 12px;">Noise</span>
                         <input id="range_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.05" data-slider-value="[0,1]"/>
 
                         <div class="row graph-row">
