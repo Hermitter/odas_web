@@ -208,3 +208,16 @@ body {
   padding-top: 60px;
   padding-bottom: 0px
 }
+
+
+
+
+/* CUSTOM CHANGES */
+.col-md-7 {
+    float: none;
+    width: 100%;
+}
+
+.sphere-row {
+    height: 60%;
+}

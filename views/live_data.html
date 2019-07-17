@@ -43,7 +43,12 @@
 
             <div class="container-fluid content main">
                 <div class="row content">
-                    <div class="col-md-3 layout darker">
+
+
+
+
+                    <!-- LEFT COLUMN -->
+                    <!-- <div class="col-md-3 layout darker">
                         <h2>ODAS Data</h2>
                         <div class="well" id="system-monitor">
                             <form>
@@ -92,15 +97,22 @@
                           <h4>ODAS Control</h4>
                           <p>ODAS Remote is connected</p>
                         </div>
-                    </div>
+                    </div> -->
+
+
+
+
                     <div class="col-md-7 layout">
+                        <div id="system-monitor"><p>IP {{system.ip}}</p></div>
+                        <input id="range_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.05" data-slider-value="[0,1]"/>
+
                         <div class="row graph-row">
                             <div class="col-xs-12 content">
                                 <h4 class="abs_head">Source Elevation</h4>
                                 <canvas class="graph"></canvas>
                             </div>
                         </div>
-                        <div class="row graph-row">
+                        <div style="display:none !important" class="row graph-row">
                             <div class="col-xs-12 content">
                                 <h4 class="abs_head">Source Azimut</h4>
                                 <canvas class="graph"></canvas>
@@ -114,7 +126,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 layout darker">
+
+                    <!-- COLUMN RIGHT -->
+                    <!-- <div class="col-md-2 layout darker">
                         <div class="collapse navbar-collapse" id="source-list">
 
                             <h2>Sources</h2>
@@ -127,7 +141,6 @@
                                     </td>
                                 </tr>
                             </table>
-
                             <h2>Filters</h2>
                             <table class="table table-hover" id="filter_table">
                                 <tr>
@@ -150,18 +163,18 @@
                             <input id="range_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.05" data-slider-value="[0,1]"/>
                             <b id="right-marker">1</b>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
-            <footer class="footer">
+            <!-- <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
                         <p class="col-xs-10 text-muted">Graphic interface for ODAS library</p>
                         <a href="#" class="col-xs-2 text-right" onclick="openLegalWindow()">Legal</a>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
         </div>
 
         <script>window.$ = window.jQuery = require('./../resources/js/jquery.min.js');</script>
