@@ -11,9 +11,44 @@
         <link href="./../resources/css/bootstrap.css" rel="stylesheet">
         <link href="./../resources/css/style.css" rel="stylesheet">
         <link href="./../resources/css/bootstrap_slider.css" rel="stylesheet">
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     </head>
     <body>
         <div class="wrapper">
+            <!-- socket.io server -->
+            <div id="pi-sensors">
+                <div id="pi-overview">
+                    <p>Status: <span id="pi-status">Disconnected</span></p>
+                </div>
+
+                Sensor Device IP:<br>
+                <input type="text" value="192.168.2.160" id="pi-ip"><input onclick="connectPi()" type="button" value="Connect" name="connect_sensor">
+            </div>
+
+            <!-- socket connection -->
+            <script>
+                var socket;
+
+                function connectPi(){
+                    socket = io("http://"+document.getElementById("pi-ip").value+":3000")
+                    // socket = io('http://192.168.2.160:3000');
+                    
+                }
+
+                console.log(123)
+                socket.on
+
+                socket.on('testOdas', function(text){
+                    console.log(text);
+                });
+            </script>
+            <!------------------------------------------------------>
+
+
+
+
+
             <nav class="navbar navbar-default bg-primary navbar-fixed-top ">
                 <div class="container-fluid">
 
@@ -49,61 +84,6 @@
             <div class="container-fluid content main">
                 <div class="row content">
 
-
-
-
-                    <!-- LEFT COLUMN -->
-                    <!-- <div class="col-md-3 layout darker">
-                        <h2>ODAS Data</h2>
-                        <div class="well" id="system-monitor">
-                            <form>
-                                <div class="form-group">
-                                    <h4>Local System Monitor</h4>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">CPU Usage</span><span class="form-control">{{system.cpu}}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">CPU Temp.</span><span class="form-control">{{system.temp}}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Memory Usage</span><span class="form-control">{{system.mem}}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">IP</span><span class="form-control">{{system.ip}}</span>
-                                    </div>
-                                </div>
-                              </form>
-                            </div>
-                            <div class="well" id="odas-local">
-                              <form>
-                                <div class="form-group">
-                                    <h4>ODAS Control</h4>
-                                </div>
-                                <div class="form-group">
-                                  <label>ODAS Core</label>
-                                  <input type="text" class="form-control" id="odas-core-path" placeholder="Not specified"/>
-                                </div>
-                                <div class="form-group">
-                                  <label>ODAS Config</label>
-                                  <input type="text" class="form-control" id="odas-config-path" placeholder="Not specified"/>
-                                </div>
-                            </form>
-                            <button class="btn btn-primary" id="odas-btn">Launch ODAS</button>
-                        </div>
-                        <div class="well" id="odas-remote">
-                          <h4>ODAS Control</h4>
-                          <p>ODAS Remote is connected</p>
-                        </div>
-                    </div> -->
-
                     <div class="col-md-7 layout">
                         <span style="margin-right: 12px;">Noise</span>
                         <input id="range_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.05" data-slider-value="[0,1]"/>
@@ -128,55 +108,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- COLUMN RIGHT -->
-                    <!-- <div class="col-md-2 layout darker">
-                        <div class="collapse navbar-collapse" id="source-list">
-
-                            <h2>Sources</h2>
-                            <table class="table table-hover" id="source_table">
-                                <tr v-for = "source in sources">
-                                    <td>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" v-model="source.selected" v-on:change="showHide">Source  <span v-if = "source.active" class="badge" v-bind:style = "{ 'background-color' : source.rgbValueString }" >{{source.id}}</span></label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <h2>Filters</h2>
-                            <table class="table table-hover" id="filter_table">
-                                <tr>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" v-model="showSources" v-on:change="showSrc">Sources</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" v-model="showPotentials" v-on:change="showPot">Potentials</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <p>Potential sources energy range:</p>
-                            <b id="left-marker">0</b>
-                            <input id="range_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1" data-slider-step="0.05" data-slider-value="[0,1]"/>
-                            <b id="right-marker">1</b>
-                        </div>
-                    </div> -->
                 </div>
             </div>
-
-            <!-- <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <p class="col-xs-10 text-muted">Graphic interface for ODAS library</p>
-                        <a href="#" class="col-xs-2 text-right" onclick="openLegalWindow()">Legal</a>
-                    </div>
-                </div>
-            </footer> -->
         </div>
 
         <script>window.$ = window.jQuery = require('./../resources/js/jquery.min.js');</script>
