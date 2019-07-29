@@ -19,7 +19,7 @@
             <!-- socket.io server -->
             <div id="pi-sensors">
                 <div id="pi-overview">
-                    <p>Status: <span id="pi-status">Disconnected</span></p>
+                    <h4>Status: <span id="pi-status"></span></h4>
                 </div>
 
                 Sensor Device IP:<br>
@@ -32,12 +32,23 @@
 
                 function connectPi(){
                     socket = io("http://"+document.getElementById("pi-ip").value+":3000")
-                    // socket = io('http://192.168.2.160:3000');
-                    
                 }
 
-                console.log(123)
-                socket.on
+                var lastStatus = false;
+                setInterval(() => {
+                    if (socket != undefined)
+                        if(socket.connected){
+                            lastStatus = socket.connected;
+                            document.getElementById("pi-status").innerHTML = "Connected";
+                            document.getElementById("pi-status").style.backgroundColor = "green"
+                        }
+
+                        else if(!socket.connected){
+                            lastStatus = socket.connected;
+                            document.getElementById("pi-status").innerHTML = "Disconnected";
+                            document.getElementById("pi-status").style.backgroundColor = "red"
+                        }
+                    }, 1000);
 
                 socket.on('testOdas', function(text){
                     console.log(text);
