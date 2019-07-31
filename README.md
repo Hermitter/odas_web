@@ -13,11 +13,19 @@ Follow the Hackster ODAS guide, but use the repository for the Desktop app.
 > These commands are for you second Raspberry Pi.
 1. setup MATRIX Creator with [Raspbian Stretch](https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/)
 2. install [matrix-lite-js](https://matrix-io.github.io/matrix-documentation/matrix-lite/getting-started/javascript/)
-3. Download the repository
+4. Install git
+```
+sudo apt install git -y
+```
+5. Download the repository
 ```
 git clone https://github.com/Hermitter/odas_web logger
 cd logger/recorder
 npm install
+```
+6. Start the app
+```
+node index.js
 ```
 ​
 # Building the ODAS Computer App
