@@ -19,43 +19,69 @@
             <!-- socket.io server -->
             <div id="pi-sensors">
                 <div id="pi-overview">
-                    <h4>Status: <span id="pi-status"></span></h4>
+                    <h4 style="font-weight: bold; font-size: 24px;">Status: <span id="pi-status"></span></h4>
                 </div>
 
-                Sensor Device IP:<br>
-                <input type="text" value="192.168.2.160" id="pi-ip"><input id="pi-connect" onclick="connectPi()" type="button" value="Connect" name="connect_sensor">
-            </div>
+                <!-- Pi IP input -->
+                <div id="pi-connect">
+                    Sensor Device IP:<br>
+                    <input type="text" value="192.168.2.161" id="pi-ip"><input onclick="connectPi()" type="button" value="Connect" name="connect_sensor">
+            
+                </div>
 
+                <!-- Pi sensor data -->
+                <div id="pi-data" style="display:none">
+                    <p style="font-weight: bold; font-size: 24px;">Temperature:  <span class="sensor-value" id="temperature"></span></p>
+                    <p style="font-weight: bold; font-size: 24px;">Pressure:     <span class="sensor-value" id="pressure"></span></p>
+                    <p style="font-weight: bold; font-size: 24px;">Altitude:     <span class="sensor-value" id="altitude"></span></p>
+                    <p style="font-weight: bold; font-size: 24px;">Humidity:     <span class="sensor-value" id="humidity"></span></p>
+                    <p style="font-weight: bold; font-size: 24px;">Magnetometer: <span class="sensor-value" id="magnetometer"></span></p>
+
+
+                </div>
+
+            </div>
             <!-- socket connection -->
             <script>
                 var socket = undefined;
 
+                // Setup socket connection & events
                 function connectPi(){
                     if (socket != undefined) {socket.close();}
                     socket = io("http://"+document.getElementById("pi-ip").value+":3000")
+
+                    // imu, humidity, & pressure sensor data
+                    socket.on('sensors', function(data){
+                        console.log(data)
+                        $("#temperature").html(Math.round(data.humidity.temperature)+"°C");
+                        $("#pressure").html(data.pressure.pressure);
+                        $("#humidity").html(data.humidity.humidity);
+                        $("#altitude").html(data.pressure.altitude);
+                        $("#magnetometer").html("<br/>X: "+data.imu.mag_x + "<br/>Y: "+data.imu.mag_y+"<br/>Z: "+data.imu.mag_z);
+                    });
                 }
 
+                // Connected / trying to connect logic
                 var lastStatus = false;
                 setInterval(() => {
+                        // on connection
                     if (socket != undefined)
                         if(socket.connected){
                             lastStatus = socket.connected;
                             document.getElementById("pi-status").innerHTML = "Connected";
                             document.getElementById("pi-status").style.backgroundColor = "green"
                             $("#pi-connect").fadeOut("fast")
+                            $("#pi-data").fadeIn("fast")
                         }
-
+                        // on disconnection
                         else if(!socket.connected){
                             lastStatus = socket.connected;
                             document.getElementById("pi-status").innerHTML = "Disconnected";
                             document.getElementById("pi-status").style.backgroundColor = "red"
                             $("#pi-connect").fadeIn("fast")
+                            $("#pi-data").fadeOut("fast")
                         }
                     }, 1000);
-
-                socket.on('testOdas', function(text){
-                    console.log(text);
-                });
             </script>
             <!------------------------------------------------------>
 

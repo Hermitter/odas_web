@@ -228,17 +228,23 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
-    height: 200px;
+    height: 400px;
     z-index: 99;
     width: 400px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-width: 2px;
+    border-top-left-radius: 19px;
     background-color: white;
+    padding: 5px;
 }
 
 #pi-status {
     color: white;
     padding: 3px;
     border-radius: 5%;
+}
+
+.sensor-value{
+    font-weight: normal;
 }
