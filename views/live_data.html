@@ -31,28 +31,45 @@
 
                 <!-- Pi sensor data -->
                 <div id="pi-data" style="display:none">
+                    <button id="start-record" onclick="recordStart()">Start Recording</button>
+                    <button id="stop-record" onclick="recordStop()">Stop Recording</button>
+
                     <p style="font-weight: bold; font-size: 24px;">Temperature:  <span class="sensor-value" id="temperature"></span></p>
                     <p style="font-weight: bold; font-size: 24px;">Pressure:     <span class="sensor-value" id="pressure"></span></p>
                     <p style="font-weight: bold; font-size: 24px;">Altitude:     <span class="sensor-value" id="altitude"></span></p>
                     <p style="font-weight: bold; font-size: 24px;">Humidity:     <span class="sensor-value" id="humidity"></span></p>
                     <p style="font-weight: bold; font-size: 24px;">Magnetometer: <span class="sensor-value" id="magnetometer"></span></p>
-
-
                 </div>
 
             </div>
             <!-- socket connection -->
             <script>
                 var socket = undefined;
+                var recordStart = function(){};
+                var recordStop = function(){};
 
                 // Setup socket connection & events
                 function connectPi(){
                     if (socket != undefined) {socket.close();}
                     socket = io("http://"+document.getElementById("pi-ip").value+":3000")
 
+                    // Recording controls
+                    $("#start-record").fadeIn("fast");
+                    recordStart = function(){
+                        console.log("started recording");
+                        $("#start-record").fadeOut("fast");
+                        $("#stop-record").fadeIn("fast");   
+                        socket.emit("start record");
+                    }
+                    recordStop = function(){
+                        console.log("stopped recording");
+                        $("#start-record").fadeIn("fast");
+                        $("#stop-record").fadeOut("fast");
+                        socket.emit("stop record");
+                    }
+
                     // imu, humidity, & pressure sensor data
                     socket.on('sensors', function(data){
-                        console.log(data)
                         $("#temperature").html(Math.round(data.humidity.temperature)+"°C");
                         $("#pressure").html(data.pressure.pressure);
                         $("#humidity").html(data.humidity.humidity);
@@ -69,17 +86,17 @@
                         if(socket.connected){
                             lastStatus = socket.connected;
                             document.getElementById("pi-status").innerHTML = "Connected";
-                            document.getElementById("pi-status").style.backgroundColor = "green"
-                            $("#pi-connect").fadeOut("fast")
-                            $("#pi-data").fadeIn("fast")
+                            document.getElementById("pi-status").style.backgroundColor = "green";
+                            $("#pi-connect").fadeOut("fast");
+                            $("#pi-data").fadeIn("fast");
                         }
                         // on disconnection
                         else if(!socket.connected){
                             lastStatus = socket.connected;
                             document.getElementById("pi-status").innerHTML = "Disconnected";
-                            document.getElementById("pi-status").style.backgroundColor = "red"
-                            $("#pi-connect").fadeIn("fast")
-                            $("#pi-data").fadeOut("fast")
+                            document.getElementById("pi-status").style.backgroundColor = "red";
+                            $("#pi-connect").fadeIn("fast");
+                            $("#pi-data").fadeOut("fast");
                         }
                     }, 1000);
             </script>

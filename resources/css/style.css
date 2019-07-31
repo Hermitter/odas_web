@@ -228,7 +228,7 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
-    height: 400px;
+    height: 500px;
     z-index: 99;
     width: 400px;
     border-top-style: solid;
@@ -247,4 +247,10 @@ body {
 
 .sensor-value{
     font-weight: normal;
+}
+
+#start-record, #stop-record {
+    font-weight: bold; 
+    font-size: 24px;
+    display: none;
 }
