@@ -1,7 +1,7 @@
 # Raspberry Pi #1 ODAS Setup
 > These steps are for your first Raspberry Pi.
 Follow the Hackster ODAS guide, but use this repository for the Desktop app.
-1. setup MATRIX Creator.
+1. Setup MATRIX Creator.
 2. Install [ODAS](https://www.hackster.io/matrix-labs/direction-of-arrival-for-matrix-voice-creator-using-odas-b7a15b).
 ​
 3. To run on boot, edit the raspberry pi `/etc/rc.local` file to contain the following.
@@ -12,8 +12,8 @@ Follow the Hackster ODAS guide, but use this repository for the Desktop app.
 ​
 # Raspberry Pi #2 Sensor/Mic Recording
 > These steps are for your second Raspberry Pi.
-1. setup MATRIX Creator with [Raspbian Stretch](https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/).
-2. install [matrix-lite-js](https://matrix-io.github.io/matrix-documentation/matrix-lite/getting-started/javascript/).
+1. Setup MATRIX Creator with [Raspbian Stretch](https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/).
+2. Install [matrix-lite-js](https://matrix-io.github.io/matrix-documentation/matrix-lite/getting-started/javascript/).
 3. Install git.
 ```
 sudo apt install git -y
