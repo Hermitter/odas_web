@@ -23,14 +23,15 @@
                 </div>
 
                 Sensor Device IP:<br>
-                <input type="text" value="192.168.2.160" id="pi-ip"><input onclick="connectPi()" type="button" value="Connect" name="connect_sensor">
+                <input type="text" value="192.168.2.160" id="pi-ip"><input id="pi-connect" onclick="connectPi()" type="button" value="Connect" name="connect_sensor">
             </div>
 
             <!-- socket connection -->
             <script>
-                var socket;
+                var socket = undefined;
 
                 function connectPi(){
+                    if (socket != undefined) {socket.close();}
                     socket = io("http://"+document.getElementById("pi-ip").value+":3000")
                 }
 
@@ -41,12 +42,14 @@
                             lastStatus = socket.connected;
                             document.getElementById("pi-status").innerHTML = "Connected";
                             document.getElementById("pi-status").style.backgroundColor = "green"
+                            $("#pi-connect").fadeOut("fast")
                         }
 
                         else if(!socket.connected){
                             lastStatus = socket.connected;
                             document.getElementById("pi-status").innerHTML = "Disconnected";
                             document.getElementById("pi-status").style.backgroundColor = "red"
+                            $("#pi-connect").fadeIn("fast")
                         }
                     }, 1000);
 
