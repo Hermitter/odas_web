@@ -27,6 +27,11 @@ npm install
 ```
 node index.js
 ```
+7. To run on boot, edit the raspberry pi `/etc/rc.local` file to contain
+```
+# Autostart ODAS
+/home/pi/.nvm/versions/node/v12.7.0/bin/node /home/pi/logger/recorder/index.js &
+```
 ​
 # Building the ODAS Computer App
 > These commands are for you personal computer.
